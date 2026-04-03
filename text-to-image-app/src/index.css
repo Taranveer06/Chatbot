@@ -1,0 +1,86 @@
+/* ─── Google Fonts ─────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+/* ─── Design Tokens — AI-Native Dark Glassmorphism ─────────── */
+:root {
+  /* Dynamic Backgrounds */
+  --bg: #05050a;
+  --bg-subtle: #080812;
+  --bg-surface: #0c0c1e;
+  --bg-elevated: #12122b;
+
+  /* Premium Glassmorphism */
+  --glass-base: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-shine: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(24px);
+
+  /* Vivid Accent System */
+  --pk-indigo: #6366f1;
+  --pk-violet: #8b5cf6;
+  --pk-cyan: #06b6d4;
+  --pk-emerald: #10b981;
+
+  --gradient-brand: linear-gradient(135deg, #8b5cf6 0%, #6366f1 50%, #3b82f6 100%);
+  --gradient-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+  --gradient-glow: radial-gradient(circle at 50% -20%, rgba(139, 92, 246, 0.2), transparent 70%);
+  --gradient-text: linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #818cf8 100%);
+
+  /* Typography Hierarchy */
+  --text-main: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-dim: #64748b;
+  --text-accent: #c4b5fd;
+
+  /* Structural Tokens */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-full: 9999px;
+
+  /* Shadows & Depth */
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-high: 0 20px 50px rgba(0, 0, 0, 0.6);
+  --shadow-accent: 0 0 30px rgba(139, 92, 246, 0.2);
+
+  /* Legacy Compat (Internal Mapping) */
+  --accent-1: var(--pk-violet);
+  --accent-light: var(--text-accent);
+  --border: var(--glass-border);
+  --border-active: var(--pk-indigo);
+  --skeleton-base: rgba(255, 255, 255, 0.04);
+  --skeleton-shine: rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Reset ─────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  background-image:
+    var(--gradient-glow),
+    radial-gradient(ellipse 40% 30% at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
