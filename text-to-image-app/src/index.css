@@ -70,7 +70,7 @@ html {
 body {
   font-family: "Inter", system-ui, sans-serif;
   background: var(--bg);
-  color: var(--text-primary);
+  color: var(--text-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
