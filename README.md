@@ -1,9 +1,10 @@
-# Chatbot - Text-to-Image AI Studio
+# Chatbot - AI Creative Studio
 
-A powerful AI studio for text-to-image generation.
+A premium AI-native creative suite built with React and Vite.
 
 ## Project Structure
-- `text-to-image-app/`: The main application code built with React/Vite.
+- `text-to-image-app/`: The core application code.
+- `vercel.json`: Root-level deployment config for automated GitHub synchronization.
 
 ## Setup
 To run the app locally, follow these steps:
