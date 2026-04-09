@@ -3,7 +3,11 @@ import "./App.css";
 
 const HF_TOKEN = import.meta.env.VITE_HF_TOKEN;
 const IMAGE_URL = "https://router.huggingface.co/nscale/v1/images/generations";
-const CHAT_URL = "https://api-inference.huggingface.co/models/microsoft/Phi-3-mini-4k-instruct/v1/chat/completions";
+const CHAT_MODELS = [
+  "microsoft/Phi-3-mini-4k-instruct",
+  "mistralai/Mistral-7B-Instruct-v0.3",
+  "HuggingFaceH4/zephyr-7b-beta"
+];
 
 /* ── Icons ─────────────────────────────────────────────────── */
 const IconImage = () => (
@@ -60,14 +64,25 @@ async function fetchImage(prompt) {
 }
 
 async function fetchChat(prompt) {
-  const res = await fetch(CHAT_URL, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${HF_TOKEN}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ messages: [{ role: "user", content: prompt }], max_tokens: 512 }),
-  });
-  if (!res.ok) throw new Error(`Chat API error ${res.status}`);
-  const json = await res.json();
-  return json?.choices?.[0]?.message?.content;
+  let lastError;
+  for (const model of CHAT_MODELS) {
+    const url = `https://api-inference.huggingface.co/models/${model}/v1/chat/completions`;
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${HF_TOKEN}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: [{ role: "user", content: prompt }], max_tokens: 512 }),
+      });
+      if (!res.ok) throw new Error(`Chat API error ${res.status}`);
+      const json = await res.json();
+      const text = json?.choices?.[0]?.message?.content;
+      if (text) return text;
+    } catch (err) {
+      lastError = err;
+      console.warn(`Model ${model} failed, trying next...`, err.message);
+    }
+  }
+  throw lastError || new Error("All chat models failed.");
 }
 
 /* ── Component ─────────────────────────────────────────────── */
