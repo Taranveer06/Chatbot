@@ -3,7 +3,7 @@ import "./App.css";
 
 const HF_TOKEN = import.meta.env.VITE_HF_TOKEN;
 const IMAGE_URL = "https://router.huggingface.co/nscale/v1/images/generations";
-const CHAT_URL = "https://router.huggingface.co/nebius/v1/chat/completions";
+const CHAT_URL = "https://api-inference.huggingface.co/models/microsoft/Phi-3-mini-4k-instruct/v1/chat/completions";
 
 /* ── Icons ─────────────────────────────────────────────────── */
 const IconImage = () => (
@@ -63,7 +63,7 @@ async function fetchChat(prompt) {
   const res = await fetch(CHAT_URL, {
     method: "POST",
     headers: { Authorization: `Bearer ${HF_TOKEN}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "Qwen/Qwen2.5-72B-Instruct", messages: [{ role: "user", content: prompt }], max_tokens: 1024 }),
+    body: JSON.stringify({ messages: [{ role: "user", content: prompt }], max_tokens: 512 }),
   });
   if (!res.ok) throw new Error(`Chat API error ${res.status}`);
   const json = await res.json();
